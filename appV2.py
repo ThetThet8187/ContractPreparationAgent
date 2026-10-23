@@ -36,8 +36,14 @@ else:
 # -----------------------------
 # 2. Gemini API configuration
 # -----------------------------
-api_key = os.getenv("GEMINI_API_KEY")
-model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+api_key = (
+    st.secrets.get("GEMINI_API_KEY", "")
+    or os.getenv("GEMINI_API_KEY", "")
+)
+model = (
+    st.secrets.get("GEMINI_MODEL", "")
+    or os.getenv("GEMINI_MODEL", "")
+)
 
 if not api_key:
     st.error(
